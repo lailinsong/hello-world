@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 注解扫描 -->
+	<context:component-scan base-package="com.myxdxy.controller"></context:component-scan>
+	<!-- 注解驱动 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 将springmvc不能处理的请求交给tomcat -->
+	<mvc:default-servlet-handler/>
+	<!-- 放行静态资源 -->
+	<mvc:resources location="/pages/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/pages/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/pages/bs/" mapping="/bs/**"></mvc:resources>
+	<mvc:resources location="/pages/fonts/" mapping="/fonts/**"></mvc:resources>
+	<mvc:resources location="/pages/images/" mapping="/images/**"></mvc:resources>
+	<!-- 控制器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/main"/>
+			<mvc:mapping path="/showPage"/>
+			<mvc:mapping path="/addarticle"/>
+			<mvc:mapping path="/userinfo"/>
+			<mvc:mapping path="/adduser"/>
+			<mvc:mapping path="/listUser"/>
+			<mvc:mapping path="/selLogByPage"/>
+			<mvc:mapping path="/selBSet"/>
+			<mvc:mapping path="/selUserById"/>
+			<mvc:mapping path="/selById"/>
+			<bean class="com.myxdxy.interceptor.UserInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>
